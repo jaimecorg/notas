@@ -9,5 +9,4 @@ import com.jaimecorg.notas.models.Nota;
 
 public interface NotaRepository extends JpaRepository<Nota, Integer>{
     List<Nota> findByTituloContainingAndFechaGreaterThan(String titulo, Date fecha);
-
 }
