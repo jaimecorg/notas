@@ -1,5 +1,6 @@
 package com.jaimecorg.notas.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.jaimecorg.notas.models.Nota;
@@ -11,4 +12,5 @@ public interface NotaService {
     public void update(int id, Nota nota);
     public void deleteById(int id);
     public void deleteAll();
+    public List<Nota> findByTituloYFecha(String titulo, Date fecha);
 }

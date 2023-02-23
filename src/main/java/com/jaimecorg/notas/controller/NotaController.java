@@ -1,15 +1,17 @@
 package com.jaimecorg.notas.controller;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jaimecorg.notas.models.Nota;
@@ -32,17 +34,12 @@ public class NotaController {
     }
 
     @GetMapping(value="/notas/buscar/{texto}")
-    public List<Nota> findByTitulo(@PathVariable String texto) {
-        List<Nota> notas = notaService.findAll();
-        List<Nota> notasEncontradas = new ArrayList<Nota>();
+    public List<Nota> findByTituloYFecha(@RequestParam String titulo, 
+    @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha) {
+        
+        List<Nota> notas = notaService.findByTituloYFecha(titulo, fecha);
 
-        for (Nota nota : notas){
-            if (nota.getTitulo().contains(texto)){
-                notasEncontradas.add(nota);
-            }
-        }
-
-        return notasEncontradas;
+        return notas;
     }
 
     @DeleteMapping("/notas/{id}")

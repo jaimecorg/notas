@@ -1,5 +1,6 @@
 package com.jaimecorg.notas.services.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,5 +53,12 @@ public class NotaServiceImpl implements NotaService{
     @Override
     public void deleteAll() {
         notaRepository.deleteAll();
+    }
+
+    @Override
+    public List<Nota> findByTituloYFecha(String titulo, Date fecha) {
+        List<Nota> notasTituloFecha = notaRepository.findByTituloContainingAndFechaGreaterThan(titulo, fecha);
+
+        return notasTituloFecha;
     }
 }
